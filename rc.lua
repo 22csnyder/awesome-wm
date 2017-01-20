@@ -17,6 +17,15 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
 
+--{{ Screenful
+--This is a section to allow auto configurations of screens
+--when devices are added
+--https://github.com/dluksza/screenful
+--also see ~/Sourcecode/screenful
+--}}
+require("awful.remote")
+require("screenful")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -430,8 +439,13 @@ awful.key({     }, "XF86AudioRaiseVolume", function() awful.util.spawn("amixer -
 awful.key({     }, "XF86AudioLowerVolume", function() awful.util.spawn("amixer -D pulse sset Master 9%-") end),
 awful.key({     }, "XF86AudioMute", function() awful.util.spawn("amixer -D pulse sset Master 0%", false) end),
 
---awful.key({modkey,     }, "F1",  function() awful.screen.focus(1) end),
---awful.key({modkey,     }, "F2",  function() awful.screen.focus(2) end),
+awful.key({modkey,     }, "F1",  function() awful.screen.focus(1) end),
+awful.key({modkey,     }, "F2",  function() awful.screen.focus(2) end),
+--This just cycles screen to the next one
+awful.key({modkey, "Shift" }, "o",  awful.client.movetoscreen ),
+--For the below method to work, it needs to be fed the actual screen
+--awful.key({modkey, "Shift" }, "F1",  function() awful.client.movetoscreen(1) end),
+--awful.key({modkey, "Shift" }, "F2",  function() awful.client.movetoscreen(2) end),
 
 
 -- {{ Vim-like controls:
